@@ -8,19 +8,19 @@
     "test": "./node_modules/.bin/mocha --require test/support/env --check-leaks --bail test/",
     "jshint": "./node_modules/.bin/jshint --verbose .",
     "jscs": "./node_modules/.bin/jscs .",
-	"test-ci": "npm run jshint && npm run jscs && npm run test"
+    "test-ci": "npm run jshint && npm run jscs && npm run test"
   },
   "dependencies": {
-    "body-parser": "1.15.1",
+    "body-parser": "^1.18.3",
     "bootstrap": "^4.0.0-alpha.4",
     "cookie-parser": "1.4.3",
-    "debug": "2.2.0",
-    "ejs": "2.4.1",
-    "express": "4.13.4",
-    "express-session": "1.14.1",
-    "morgan": "1.7.0",
+    "debug": "2.6.9",
+    "ejs": "2.5.5",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.1",
     "node-sass-middleware": "0.8.0",
-    "serve-favicon": "2.3.0"
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "jscs": "^3.0.7",

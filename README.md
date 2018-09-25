@@ -1,14 +1,32 @@
 # appium-ui
 [![Build Status](https://travis-ci.org/bongster/appium-ui.svg?branch=master)](https://travis-ci.org/bongster/appium-ui)
 
-### How to use 
+### REQUIREMENTS
+* docker
+* docker-compose
 
-* install dependencies:
-	$ cd appium-ui && npm install
+### HOW TO USE
 
-* run the app:
-	$ DEBUG=appium-ui:* npm start
+* docker-compose up - (start services)
+* docker-compose down - (down services)
 
+### SERVICES
+
+* frontend
+
+> The service for showing user about result data about test
+
+  - PORTS: 3000
+  - URL: http://localhost:3000
+
+* rabbitmq
+
+> Queue
+
+  - PORTS: 15672, 5672
+  - URL: http://localhost:15672
+  - USER: rabbitmq
+  - PASSWORD: rabbitmq
 
 ### Tip
 

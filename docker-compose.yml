@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  frontend:
+    image: node:carbon
+    working_dir: /usr/src/app
+    # build:
+    #   context: .
+    #   dockerfile: services/frontend
+    command: >
+      bash -c "npm install && npm start"
+    env_file:
+      - ./config/config.env
+    volumes:
+      - ./services/frontend:/usr/src/app
+      - node_modules-frontend-volume:/usr/src/app/node_modules
+    ports:
+      - 3000:3000
+  rabbitmq:  # referenced -> https://github.com/micahhausler/rabbitmq-compose
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+      RABBITMQ_DEFAULT_VHOST: rabbitmq
+    volumes:
+      - rabbitmq-volume:/var/lib/rabbitmq/mnesia/rabbit@rabbitmq
+    # logging:
+    #   driver: none
+    ports:
+      - 5672:5672
+      - 15672:15672
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+  #   depends_on:
+  #     - mongo
+
+  # java-worker-1:
+  #   build:
+  #     context: .
+  #     dockerfile: ./services/worker/java/Dockerfile
+  #   working_dir: /usr/src/app
+  #   command: [bash, './run.sh']
+  #   env_file:
+  #     - ./config/config.env
+  #   volumes:
+  #       - ./services/java_worker/repo:/root/.m2
+  #       - ./services/java_worker:/usr/src/app
+  #       - ./lib/db/java/src/main/java/com/netandhi/ub2ps/db:/usr/src/app/src/main/java/com/netandhi/ub2ps/db
+  #       - ./logs/java-worker:/logs
+
+volumes:
+  node_modules-frontend-volume:
+  rabbitmq-volume:
